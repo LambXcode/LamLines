@@ -1,0 +1,192 @@
+SQL:
+
+-Database language that allows us to interact with relational database management systems
+-rows and columns
+
+
+Database Management systems:
+
+-MySQL
+-PostgreSQL
+-SQLite
+
+SQLite Types:
+
+- Text
+- Numeric
+- Integers
+- real 
+- Blob - binary large object 
+
+MySQL:
+
+- Char (size)
+- Varchar (size)
+- Smallint
+- int
+- bigint
+- float
+- double 
+
+SQL Create Table:
+
+CREATE TABLE flights {
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    origin TEXT NOT NULL,
+    destination TEXT NOT NULL,
+    duration INTEGER NOT NULL
+};
+
+#primary key - primary way we will identify
+#AUTOINCREMENT automatically update the id when we add a new row 
+
+
+Insert command (add data):
+
+INSERT INTO flights
+    (origin,destination,duration)
+    VALUES ("New York","London", 415);
+
+Retrieve data (select query):
+
+    SELECT * FROM flights;
+
+    * wildcard - select all the posssible colmuns/data
+
+    more specific:
+
+    SELECT origin, destination FROM flights;
+
+    using id:
+
+    SELECT * FROM flights WHERE id = 3;
+
+    keyword:
+
+    SELECT * FROM flights WHERE origin = "New York";
+
+    
+Insert values:
+
+-INSERT INTO flights (origin,destination,duration) VALUES ('New York', 'London',415); 
+
+Column Mode:
+
+- .mode columns
+- .headers yes
+
+
+SELECT * FROM flights WHERE duration > 500;
+SELECT * FROM flights WHERE duration > 500 AND destination = 'Paris';
+SELECT * FROM flights WHERE origin IN ('New York','Lima');
+
+Wildcard:
+
+SELECT * FROM flights WHERE origin LIKE "%a%" - wildcard - looking at the values, % - zero or more chars, followed by an a. 
+- aslong as there is an a in the origin 
+
+Functions:
+
+-Average
+-Count
+-Max
+-Min
+-...
+
+Update data:
+
+UPDATE flights
+    SET duration = 430
+    WHERE origin = "New York"
+    AND destination = "London";
+
+
+Delete data:
+
+DELETE FROM flights WHERE destination = "Tokyo";
+
+Other Clauses:
+
+-LIMIT
+-ORDER BY 
+-GROUP BY 
+-HAVING
+-...
+
+Foreign Key:
+
+-Reference to other id's in other tables. 
+-Association tables - associates one value from a table to a value of a different table 
+
+Join Query:
+
+-JOIN 
+- Allows us to link tables 
+
+-JOIN / inner-Join
+-LEFT OUTER JOIN
+-RIGHT OUTER JOIN
+-FULL OUTER JOIN
+
+
+CREATE INDEX:
+
+CREATE INDEX name_index ON passengers (last);
+
+Concerns 
+-------
+
+SQL Injection:
+
+SELECT * FROM users
+WHERE username = "hacker"--" AND password = "";
+
+Race Conditions:
+-same query at the same time, conflits which results in potential issues. 
+-lock on the database 
+
+Django Models:
+--------------
+
+python manage.py makemigrations
+
+to apply:
+
+python manage.py migrate to apply changes 
+
+To enter djangos shell:
+
+python manage.py shell
+
+from flights.model import Flight or * for everything
+
+f = Flight(origin="New York", destination="London",duration=415)
+f.save()
+
+To query flight:
+Flight.objects.all()
+
+we can assign the above to a variable for example called flight then double
+flight.id or flight.origin or flight.destination
+
+Ctrl+D to exit. 
+
+to delete:
+
+flight.delete()
+
+
+Filter:
+
+Airport.objects.filter(city="New York)
+
+To Use Admin Panel:
+
+-create admin account 
+-python manage.py createsuperuser
+
+we need to add the models to the admin app.
+(admin.py)
+
+Authentification Methods:
+

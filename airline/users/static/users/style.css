@@ -1,0 +1,91 @@
+/* Styles for the login form */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 300px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px #888888;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none; /* remove border */
+}
+
+input[type="text"],
+input[type="password"] {
+    margin-bottom: 10px;
+    width: 200px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    padding: 5px;
+}
+
+input[type="submit"] {
+    margin-top: 10px;
+    width: 100px;
+    height: 35px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+.loginpic {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    background-color: transparent; /* make checkered background disappear */
+}
+
+.register,
+.register-link {
+    margin-top: 10px;
+    color: black; /* change register link to black */
+}
+
+.register:hover,
+.register-link:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+.adminlink,
+.register-link {
+    margin-top: 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+/* Styles for the header */
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    height: 60px;
+}
+
+/* Styles for the alert */
+/* Styles for the alert */
+.alert {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f2f2f2;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #888888;
+}

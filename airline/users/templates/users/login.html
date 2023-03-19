@@ -1,0 +1,41 @@
+{% extends "users/layout.html" %}
+{% load static %}
+{% block body %}
+    <title>Login Portal</title>
+    <link rel="stylesheet" href="{% static 'users/style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('{% static "users/loginback.jpg" %}');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" id="accscc">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    {% if message %}
+    <div id="alert-div" class="alert alert-warning" role="alert">
+        {{ message }}
+    </div>
+    {% endif %}
+    <form action="{% url 'login' %}" method="post">
+        <img src="{% static 'users/airplane3.png' %}" alt="loginpicture" class="loginpic">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit" value="Login">
+        <a href="/admin/" class="adminlink">Admin Login</a>
+        <a href="{% url 'register' %}" class="register">Register</a>
+    </form>
+    <script>
+        setTimeout(function() {
+            document.getElementById('alert-div').style.display = 'none';
+        }, 5000); // this will hide the alert after 5 seconds
+        setTimeout(function() {
+            document.getElementById('accscc').style.display = 'none';
+        }, 5000); // this will hide the alert after 5 seconds
+    </script>    
+{% endblock %}

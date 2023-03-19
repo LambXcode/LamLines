@@ -1,0 +1,116 @@
+{% extends "users/layout.html" %}
+{% load static %}
+{% block body %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+    .login-button {
+        float: right;
+        margin-top: 25px;
+        margin-left: 10px;
+    }
+    body {
+            background-image: url('{% static "users/loginback.jpg" %}');
+            background-repeat: no-repeat;
+            background-size: cover;
+    }
+
+    .container {
+        background-color: #fff;
+        border: 2px solid #000;
+        padding: 20px;
+        margin: 20px;
+        width: 80%;
+        max-width: 600px;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+    <div class="container">
+        {% csrf_token %}
+        <h1>Register</h1>
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <form method="POST">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                {% csrf_token %}
+                <input type="text" name="username" class="form-control" id="username" value="{{ form.username.value|default:'' }}">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" class="form-control" id="email" value="{{ form.email.value|default:'' }}">
+            </div>
+            <div class="form-group">
+                <label for="password1">Password:</label>
+                <input type="password" name="password1" class="form-control" id="password1">
+            </div>
+            <div class="form-group">
+                <label for="password2">Confirm password:</label>
+                <input type="password" name="password2" class="form-control" id="password2">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" name="phone" class="form-control" id="phone" value="{{ form.phone.value|default:'' }}">
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="show_password" id="show_password">Show password</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'login' %}'">Log In</button>
+        </form>
+    </div>
+    <script>
+        var showPasswordCheckbox = document.getElementById('show_password');
+        var passwordFields = document.querySelectorAll('input[type="password"]');
+    
+        showPasswordCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                passwordFields.forEach(function(field) {
+                    field.type = 'text';
+                });
+            } else {
+                passwordFields.forEach(function(field) {
+                    field.type = 'password';
+                });
+            }
+        });
+        var passwordFields = document.querySelectorAll('input[type="password"]');
+    
+        function validatePassword() {
+        var password = passwordFields[0].value;
+        var password2 = passwordFields[1].value;
+        var errorMsg = '';
+
+        if (password.length < 8) {
+            errorMsg += 'Password should be at least 8 characters long.\n';
+        }
+
+        if (!/\d/.test(password) || !/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+            errorMsg += 'Password should contain at least one uppercase letter, one lowercase letter, one digit, and one special character.\n';
+        }
+
+        if (password != password2) {
+            errorMsg += 'Passwords do not match.\n';
+        }
+
+        if (errorMsg) {
+            alert(errorMsg);
+            return false;
+        }
+
+        return true;
+        }
+
+        document.querySelector('form').addEventListener('submit', function(event) {
+        if (!validatePassword()) {
+            event.preventDefault();
+        }
+        });
+    </script>    
+{% endblock %}

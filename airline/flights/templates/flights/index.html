@@ -1,0 +1,40 @@
+{% extends "flights/layout.html" %}
+{% load static %}
+{% block body %}
+  <link rel="stylesheet" href="{% static 'flights/style.css' %}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style>
+    body {
+      background-image: url('{% static "flights/loginback.jpg" %}');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    /* Add the following styles for the white box */
+    .white-box {
+      background-color: #fff;
+      border: 2px solid #000;
+      padding: 20px;
+      margin: 20px;
+      width: 80%;
+      max-width: 600px;
+      text-align: center;
+    }
+  </style>
+    <div class="white-box">
+      <h1>Scheduled flights</h1>
+      <ul>
+        {% for flight in flights %}
+        <li>
+          <a href="{% url 'flight' flight.id %}">
+            Flight {{ flight.id }}: {{ flight.origin }} to {{ flight.destination }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      <div class="links">
+        <a href="{% url 'logout'%}">Log Out</a>
+        <a href="{% url 'user' %}">My Account</a>
+      </div>
+  </div>
+{% endblock %}
